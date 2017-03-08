@@ -33,7 +33,7 @@ follows = api.get_user(userid)
 def followers():
   while True:
     fans = str(follows.followers_count)
-    data = '{"attachments":[{"fallback":"'+handle+' has '+fans+' followers.","pretext":"'+handle+' has '+fans+' followers.","color":"'+style+'","fields":[{"title":"Followers","value":"'+handle+' has '+fans+' followers.","short":false}]}]}'
+    data = '{"attachments":[{"fallback":"'+handle+' has '+fans+' followers.","pretext":"'+handle+' has '+fans+' followers.","color":"'+style+'","fields":[{"title":"Twitter Fans","value":"'+handle+' has '+fans+' followers.","short":false}]}]}'
     slack = urllib2.Request(webhook, data, {'Content-Type': 'application/json'})
     f = urllib2.urlopen(slack)
     f.close()
