@@ -1,6 +1,20 @@
 #!/usr/bin/python
 
 import tweepy
+import urllib2
+import time
+
+# The time (in seconds) between checks. Default is 1800 seconds (30 minutes)
+wait = 1800
+
+# Replace with your incoming webhook URL generated in Slack
+webhook = ''
+
+# Colour for "OK" message
+ok = "#74a727"
+
+# Colour for "Uh oh!" message
+warn = "#971a1a"
 
 # Add the relevant keys, tokens and secrets from your Twitter app made here: https://apps.twitter.com/
 
@@ -24,14 +38,15 @@ api = tweepy.API(auth)
 
 follows = api.get_user(user)
 
-# Displays the number of followers for the user in the terminal
-
-#print(follows.followers_count)
-
 # Experimenting with a function
 
 def followers():
-    look = follows.followers_count
-    return (look)
+  while True:
+    look = str(follows.followers_count)
+    data = '{"attachments":[{"fallback":"'+user+' has '+look+' followers.","pretext":"'+user+' has '+look+' followers.","color":"'+ok+'","fields":[{"title":"OK","value":"'+user+' has '+look+' followers.","short":false}]}]}'
+    slack = urllib2.Request(webhook, data, {'Content-Type': 'application/json'})
+    f = urllib2.urlopen(slack)
+    f.close()
+    time.sleep(wait)
 
 followers()
