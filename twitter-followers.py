@@ -14,7 +14,7 @@ access_token_secret = ''
 # Variables - configure the bits below to get your script working. 
 
 wait = 12600        # Time (in seconds) between checks. Default is 12600 seconds (210 minutes / 3.5 hours)
-style = "#74a727"   # Colour for the message - this is the green from the Raspberry Pi logo
+style = "#1da1f2"   # Colour for the message - default is Twitter Bird blue
 userid = ''           # The Twitter user you want to track the followers of (without the @)
 handle = ''         # Tweak this to display the userid in a nicer format - i.e. "Raspberry Coulis" instead of "raspberrycoulis"
 
