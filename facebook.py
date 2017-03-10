@@ -17,7 +17,7 @@ webhook = ''
 
 def fanCount():
     fb_id, app_id, secret = '', '', ''      # Add your Page ID, App ID and Secret between each quotation mark
-    fb_url = 'https://graph.facebook.com/{}?access_token={}|{}&fields=fan_count'.format(quote(fb_id), quote(app_id, quote(secret))
+    fb_url = 'https://graph.facebook.com/{}?access_token={}|{}&fields=fan_count'.format(quote(fb_id), quote(app_id), quote(secret))
     fanCount = urllib2.urlopen(fb_url).read()
     jsonResponse = json.loads(fanCount)
     return jsonResponse['fan_count']
