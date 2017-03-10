@@ -13,7 +13,7 @@ access_token_secret = ''
 
 # Variables - configure the bits below to get your script working. 
 
-wait = 12600        # Time (in seconds) between checks. Default is 12600 seconds (210 minutes / 3.5 hours)
+wait = 12600        # Time (in seconds) between checks. Default is 12600 seconds (210 minutes / 3.5 hours).
 style = "#1da1f2"   # Colour for the message - default is Twitter Bird blue
 userid = ''           # The Twitter user you want to track the followers of (without the @)
 handle = ''         # Tweak this to display the userid in a nicer format - i.e. "Raspberry Coulis" instead of "raspberrycoulis"
@@ -30,13 +30,15 @@ follows = api.get_user(userid)
 
 # The function that does the magic - checks your Twitter user for the number of followers then sends this data to Slack to notify you.
 
-def followers():
-  while True:
+def postToSlack():
+#  while True:
     fans = str(follows.followers_count)
     data = '{"attachments":[{"fallback":"'+handle+' has '+fans+' followers.","pretext":"'+handle+' has '+fans+' followers.","color":"'+style+'","fields":[{"title":"Twitter Fans","value":"'+handle+' has '+fans+' followers.","short":false}]}]}'
     slack = urllib2.Request(webhook, data, {'Content-Type': 'application/json'})
     f = urllib2.urlopen(slack)
     f.close()
-    time.sleep(wait)
+#    time.sleep(wait)
 
-followers()
+postToSlack()
+
+exit()
