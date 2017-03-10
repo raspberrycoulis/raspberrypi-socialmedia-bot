@@ -56,3 +56,26 @@ You can also specify the colour displayed in the Slack notification by changing 
 
 ### Timing
 The `twitter.py` script includes sections that are currently commented out by default. If you wanted to, you can delete the # before `while True` and `time.sleep(wait)` and then commenting out (adding a #) in front of `exit()` and the script will then run based on the `wait` variable specifed. I have commented these sections out as you may prefer to schedule the script to run at set times during the day using a crontab.
+
+## facebook.py
+Again, add the necessary keys and secrets in the places specified, along with the Slack webhook. You can also provide a nicer formatted name for the Slack notification by adding the name to the `fb_page` variable too, and you can change the colour displayed in Slack when the notification is received.
+
+You'll also need to add your Facebook Page ID, App ID and Secret key in the `def fanCount` section, otherwise the script won't work.
+
+# Make each script executable
+Do this by typing the following into the terminal (assuming you are in the `raspberrypi-socialmedia-bot` folder):
+
+    chmod +x twitter.py facebook.py
+
+## Run the scripts
+Test the scripts out by running either:
+
+    ./twitter.py
+
+or
+
+    ./facebook.py
+    
+If successful, you should receive a Slack notification for each telling you how many Twitter followers you have and how many Facebook Fans you have.
+
+You can now automate them using cron, and I highly recommend [crontab.guru](https://crontab.guru/) if you need help generating the relevant command. I currently run my twice daily - at 10am and 10pm for `twitter.py` and, 10:05am and 10:05pm for `facebook.py`.

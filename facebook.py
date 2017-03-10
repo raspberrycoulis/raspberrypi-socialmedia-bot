@@ -16,8 +16,8 @@ webhook = ''
 # The functions that creates the magic - checks your Facebook Company Page for the number of fans then sends this data to Slack to notify you.
 
 def fanCount():
-    fb_id, access_key, secret = '', '', ''
-    fb_url = 'https://graph.facebook.com/{}?access_token={}|{}&fields=fan_count'.format(quote(fb_id), quote(access_key), quote(secret))
+    fb_id, app_id, secret = '', '', ''      # Add your Page ID, App ID and Secret between each quotation mark
+    fb_url = 'https://graph.facebook.com/{}?access_token={}|{}&fields=fan_count'.format(quote(fb_id), quote(app_id, quote(secret))
     fanCount = urllib2.urlopen(fb_url).read()
     jsonResponse = json.loads(fanCount)
     return jsonResponse['fan_count']
