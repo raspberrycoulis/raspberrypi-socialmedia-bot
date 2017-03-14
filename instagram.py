@@ -10,6 +10,8 @@ from config import (
     ig_webhook
 )
 
+# The functions that creates the magic - checks your Instagram account for the number of followers then sends this data to Slack to notify you.
+
 def fanCount():
         ig_url = 'https://api.instagram.com/v1/users/self/?access_token={}'.format(quote(ig_access_token))
         fanCount = urllib2.urlopen(ig_url).read()
