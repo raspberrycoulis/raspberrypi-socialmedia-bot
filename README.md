@@ -1,8 +1,8 @@
 # Raspberry Pi Social Media Bot
-Python scripts that check your Twitter and Facebook followers and sends you Slack notifications with the totals.
+Python scripts that check your Twitter, Facebook and Instagram followers and sends you Slack notifications with the totals.
 
 ## Pre-Requisites
-There are two Python scripts in here - one is for checking Twitter and the other for Facebook. To access Twitter's API, you will need to install Tweepy - Twitter for Python by doing the following:
+There are three Python scripts in here - one is for checking Twitter, one for Facebook and the other for Instagram. To access Twitter's API, you will need to install Tweepy - Twitter for Python by doing the following:
 
     sudo pip install tweepy
 
@@ -15,7 +15,7 @@ Once you have installed Tweepy, you will need to clone this repository, done sim
 
     git clone https://github.com/raspberrycoulis/raspberrypi-socialmedia-bot.git
 
-You'll then need to add the necessary parts to each script as follows.
+You'll then need to add the necessary parts to the `config.py` script as follows.
 
 ## Configuration File
 To keep things simple, I have created a global `config.py` file that you will need to update before **any** script will work. You will need to add the relevant webhooks, API keys, tokens, secrets, account names and ID's etc. in this file first. Further instructions are given in the comments of this file.
