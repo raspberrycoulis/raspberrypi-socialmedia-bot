@@ -40,7 +40,7 @@ Again, to access Facebook's API you will need some credentials. The process is v
 ### Facebook Page ID
 You will only be able to check a Facebook Page with `facebook.py`, **not** a Facebook Profile. To find out your Facebook Page ID, head over to [Find You Facebook ID](http://findmyfbid.com/) and enter the URL of your Facebook Page, i.e. `https://www.facebook.com/raspberrycoulis` and you'll be given a unique string of numbers. This is your Facebook Page ID, so take note.
 
-### Instagram App and Access Token
+## Instagram App and Access Token
 You will need to create an app over at [https://www.instagram.com/developer/](https://www.instagram.com/developer/) in order to get access to the API. Once you have an app, head on over to [http://jelled.com/instagram/access-token](http://jelled.com/instagram/access-token) in order to generate your Access Token.
 
 ## Slack Incoming Webhooks
