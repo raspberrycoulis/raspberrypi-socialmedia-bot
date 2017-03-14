@@ -17,6 +17,9 @@ Once you have installed Tweepy, you will need to clone this repository, done sim
 
 You'll then need to add the necessary parts to each script as follows.
 
+## Configuration File
+To keep things simple, I have created a global `config.py` file that you will need to update before **any** script will work. You will need to add the relevant webhooks, API keys, tokens, secrets, account names and ID's etc. in this file first. Further instructions are given in the comments of this file.
+
 ## Twitter App
 First, you'll need to create an app in Twitter. This sounds more complicated that it is, but you'll first need to go to [https://apps.twitter.com/](https://apps.twitter.com/) and then click the `Create New App` button at the top. You'll need to name your app and provide some required information along the way.
 
@@ -37,6 +40,9 @@ Again, to access Facebook's API you will need some credentials. The process is v
 ### Facebook Page ID
 You will only be able to check a Facebook Page with `facebook.py`, **not** a Facebook Profile. To find out your Facebook Page ID, head over to [Find You Facebook ID](http://findmyfbid.com/) and enter the URL of your Facebook Page, i.e. `https://www.facebook.com/raspberrycoulis` and you'll be given a unique string of numbers. This is your Facebook Page ID, so take note.
 
+### Instagram App and Access Token
+You will need to create an app over at [https://www.instagram.com/developer/](https://www.instagram.com/developer/) in order to get access to the API. Once you have an app, head on over to [http://jelled.com/instagram/access-token](http://jelled.com/instagram/access-token) in order to generate your Access Token.
+
 ## Slack Incoming Webhooks
 You'll also need to create an Incoming Webhook in Slack. [This page from Slack's API documentation](https://api.slack.com/incoming-webhooks) will provide all the information you need to get this up and running.
 
@@ -46,26 +52,10 @@ I would advise creating two different webhooks - one for the Twitter bot and one
 
 Copy the webhooks as you'll need this in `twitter.py` and `facebook.py` respectively.
 
-# Updating your Python scripts
-Now you should have all the required information to get these Python scripts working. You now need to add them to the relevant Python scipt in the places pointed out by the comments I have added. 
-
-## twitter.py
-Add your consumer key, consumer secret, access token and access token secret in the correct place (making sure you keep the '' present) and then add your Slack webhook too. You will then need to specify the username of the account you want to check the follower count of, but ignore the @ pre-fix - i.e. `raspberrycoulis`. To make this look nicer in the Slack notification, you can add the name again in the `handle` section.
-
-You can also specify the colour displayed in the Slack notification by changing the style here. You can use any hex colour code to your liking.
-
-### Timing
-The `twitter.py` script includes sections that are currently commented out by default. If you wanted to, you can delete the # before `while True` and `time.sleep(wait)` and then commenting out (adding a #) in front of `exit()` and the script will then run based on the `wait` variable specifed. I have commented these sections out as you may prefer to schedule the script to run at set times during the day using a crontab.
-
-## facebook.py
-Again, add the necessary keys and secrets in the places specified, along with the Slack webhook. You can also provide a nicer formatted name for the Slack notification by adding the name to the `fb_page` variable too, and you can change the colour displayed in Slack when the notification is received.
-
-You'll also need to add your Facebook Page ID, App ID and Secret key in the `def fanCount` section, otherwise the script won't work.
-
 # Make each script executable
 Do this by typing the following into the terminal (assuming you are in the `raspberrypi-socialmedia-bot` folder):
 
-    chmod +x twitter.py facebook.py
+    chmod +x twitter.py facebook.py instagram.py config.py
 
 ## Run the scripts
 Test the scripts out by running either:
@@ -76,6 +66,10 @@ or
 
     ./facebook.py
     
-If successful, you should receive a Slack notification for each telling you how many Twitter followers you have and how many Facebook Fans you have.
+or
 
-You can now automate them using cron, and I highly recommend [crontab.guru](https://crontab.guru/) if you need help generating the relevant command. I currently run my twice daily - at 10am and 10pm for `twitter.py` and, 10:05am and 10:05pm for `facebook.py`.
+    ./instagram.py
+    
+If successful, you should receive a Slack notification for each telling you how many Twitter followers you have, how many Facebook Fans you have and finally the number of Instagram followers you have.
+
+You can now automate them using cron, and I highly recommend [crontab.guru](https://crontab.guru/) if you need help generating the relevant command. I currently run my twice daily - at 10am and 10pm for `twitter.py`, 10:05am and 10:05pm for `facebook.py` and 10:10am and 10:10pm for `instagram.py`.
