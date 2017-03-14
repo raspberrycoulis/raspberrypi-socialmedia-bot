@@ -3,41 +3,31 @@
 import tweepy
 import urllib2
 import time
-
-# For Twitter: Add the relevant keys, tokens and secrets from your Twitter app made here: https://apps.twitter.com/
-
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_token_secret = ''
-
-# Variables - configure the bits below to get your script working. 
-
-wait = 12600        # Time (in seconds) between checks. Default is 12600 seconds (210 minutes / 3.5 hours).
-style = "#1da1f2"   # Colour for the message - default is Twitter Bird blue
-userid = ''           # The Twitter user you want to track the followers of (without the @)
-handle = ''         # Tweak this to display the userid in a nicer format - i.e. "Raspberry Coulis" instead of "raspberrycoulis"
-
-# Slack incoming webhook URL
-
-webhook = ''
+from conig import (
+    tw_webhook,
+    tw_cons_key,
+    tw_cons_sec,
+    tw_accs_tok,
+    tw_accs_sec,
+    tw_style,
+    tw_userid,
+    tw_handle
+)
 
 # Tweepy API - do not change
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(tw_cons_key, tw_cons_sec)
+auth.set_access_token(tw_accs_tok, tw_accs_sec)
 api = tweepy.API(auth)
-follows = api.get_user(userid)
+follows = api.get_user(tw_userid)
 
 # The function that does the magic - checks your Twitter user for the number of followers then sends this data to Slack to notify you.
 
 def postToSlack():
-#  while True:
     fans = str(follows.followers_count)
-    data = '{"attachments":[{"fallback":"'+handle+' has '+fans+' followers.","pretext":"'+handle+' has '+fans+' followers.","color":"'+style+'","fields":[{"title":"Twitter Fans","value":"'+handle+' has '+fans+' followers.","short":false}]}]}'
-    slack = urllib2.Request(webhook, data, {'Content-Type': 'application/json'})
+    data = '{"attachments":[{"fallback":"'+tw_handle+' has '+fans+' followers.","pretext":"'+tw_handle+' has '+fans+' followers.","color":"'+tw_style+'","fields":[{"title":"Twitter Fans","value":"'+tw_handle+' has '+fans+' followers.","short":false}]}]}'
+    slack = urllib2.Request(tw_webhook, data, {'Content-Type': 'application/json'})
     f = urllib2.urlopen(slack)
     f.close()
-#    time.sleep(wait)
 
 postToSlack()
 
