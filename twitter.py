@@ -3,7 +3,7 @@
 import tweepy
 import urllib2
 import time
-from conig import (
+from config import (
     tw_webhook,
     tw_cons_key,
     tw_cons_sec,
